@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Simplex Calculator</title>
+  <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+
+<body>
+  <h1 class="display-4">Calcular Simplex</h1>
+  <div class="container-fluid">
+    <form class="form-group">
+      <lable for="num_variavies">Quantidade de Variáveis</lable>
+      <input id="num_variavies" onfocusout="deixaInteiros(this)" class="form-control" />
+      <small id="variaveisHelp" class="form-text text-muted">Número de varíaveis de decisão (X1, X2, X3 ...)</small>
+      <br />
+      <lable for="num_restricoes">Quantidade de Restrições</lable>
+      <input id="num_restricoes" onfocusout="deixaInteiros(this)" class="form-control" />
+      <small id="restricoesHelp" class="form-text text-muted">Número de restrições do problema</small>
+      <br />
+      <button id="gera_restricoes" class="btn btn-primary" onclick="gerarRestricoes(event)">Continuar</button>
+    </form>
+    <div id="valores_div">
+      <form id="valores_form" class="form-group"></form>
+    </div>
+    <div class="container-fluid" id="novas_restricoes"></div>
+    <br/>
+    <div class="container" id="calculos"></div>
+  </div>
+</body>
+<script src="js/simplex.js"></script>
+<script src="js/index.js"></script>
+
+</html>
