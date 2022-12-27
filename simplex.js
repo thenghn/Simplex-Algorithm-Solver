@@ -1,32 +1,5 @@
 function solveSimplex(matrix) {
 
-
-	//By s0ft
-	//29th May, 2019 - 12:40AM
-	//Part of M.Sc. Water Resource Engineering - System Mathematics/Operations Research assignment
-
-	//the simplex table format is based on Hamdy A. Taha's book on Operations Research - Tenth Edition
-	//with one difference in that the z-row is kept as the last row of the table
-
-	/*
-	HA Taha - Page 106 - Reddy Mikks problem:
-	Maximize: 
-	z = 5x1 + 4x2
-	subject to:
-	6x1 + 4x2 <= 24
-	x1 + 2x2 <= 6
-	-x1 + x2 <=1
-	x2 <= 2 
-	Answer for verification: x1=3,x2=1.5,z=21 for maximum
-
-	Matrix formulation:
-	matrix=[[0,6,4,1,0,0,0,24],
-			[0,1,2,0,1,0,0,6],
-			[0,-1,1,0,0,1,0,1],
-			[0,0,1,0,0,0,1,2],
-			[1,-5,-4,0,0,0,0,0]];
-	*/
-
 	numColumns = matrix[0].length;
 	numRows = matrix.length;
 	basicVarsNum = numRows - 1;
