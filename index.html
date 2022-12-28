@@ -2,7 +2,7 @@
 <html>
 
 <head>
-	<title>Simplex solver</title>
+	<title>Simpleks Maksimizasyon Problemi Çözümü</title>
 	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
 		integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
 	<style>
@@ -21,15 +21,15 @@
 	<script type="text/javascript" src="simplex.js"></script>
 
 	<div>
-		<label for="num_vars">Karar değişkenlerinin sayısı:</label>
+		<label for="num_vars">Number of decision variables:</label>
 		<input type="number" id="num_vars">
 	</div>
 	<div>
-		<label for="num_constraints">Kısıtların sayısı:</label>
+		<label for="num_constraints">Number of constraints:</label>
 		<input type="number" id="num_constraints">
 	</div>
 	<div>
-		<input type="button" id="btn_next" value="İleri" onclick="onNextClicked()">
+		<input type="button" id="btn_next" value="Next" onclick="onNextClicked()">
 	</div>
 	<div id="maximize_func_div">
 
@@ -53,7 +53,7 @@
 			}
 
 			$("div#maximize_func_div").empty();
-			$("div#maximize_func_div").append("Maksimizasyon: Z=");
+			$("div#maximize_func_div").append("Maximize: Z=");
 
 			for (var i = 0; i < num_vars; i++) {
 				textboxText = "x" + (i + 1) + ((i == (num_vars - 1)) ? "" : "+");
@@ -85,7 +85,7 @@
 
 			$("div#optimize_btn_div").empty();
 			$("div#optimize_btn_div").append(
-				"<input type='button' id='btn_optimize' value='Optimizasyon' onclick='onOptimizeClicked()'>");
+				"<input type='button' id='btn_optimize' value='Optimize' onclick='onOptimizeClicked()'>");
 		}
 
 		function onOptimizeClicked() {
@@ -127,7 +127,7 @@
 			if (!result['error']) {
 				$("div#result_div").append("Optimum solution:<br>");
 				var basicvars = result['vars'];
-				var dVars = {};
+				var optimizedVars = {};
 				for (var i = 0; i < basicvars.length; i++) {
 					if (basicvars[i].includes("x")) {
 						optimizedVars[basicvars[i]] = matrix[i][matrix[0].length - 1];
