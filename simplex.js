@@ -1,4 +1,4 @@
-function solveSimplex(matrix) {
+function simplexMaksimizasyon(matrix) {
 
 	numColumns = matrix[0].length;
 	numRows = matrix.length;
