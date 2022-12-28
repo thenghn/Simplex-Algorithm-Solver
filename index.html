@@ -64,7 +64,7 @@
 
 
 			$("div#constraints_div").empty();
-			$("div#constraints_div").append("Constraints:<br>");
+			$("div#constraints_div").append("Kisitlamalar:<br>");
 
 			for (var j = 0; j < num_constraints; j++) {
 				for (var i = 0; i < num_vars; i++) {
@@ -125,7 +125,7 @@
 			var result = solveSimplex(matrix);
 			$("div#result_div").empty();
 			if (!result['error']) {
-				$("div#result_div").append("Optimum solution:<br>");
+				$("div#result_div").append("Optimum sonuc:<br>");
 				var basicvars = result['vars'];
 				var optimizedVars = {};
 				for (var i = 0; i < basicvars.length; i++) {
