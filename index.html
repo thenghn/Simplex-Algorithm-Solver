@@ -122,7 +122,7 @@
 			}
 			matrix.push(z_row);
 
-			var result = solveSimplex(matrix);
+			var result = simplexMaksimizasyon(matrix);
 			$("div#result_div").empty();
 			if (!result['error']) {
 				$("div#result_div").append("Optimum sonuc:<br>");
