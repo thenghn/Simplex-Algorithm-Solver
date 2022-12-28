@@ -4,13 +4,13 @@ function solveSimplex(matrix) {
 	numRows = matrix.length;
 	basicVarsNum = numRows - 1;
 
-	//populate basic variable strings
+	//temel degisken dizilerini doldur
 	basicVars = [];
 	for (var i = 0; i < numRows - 1; i++) {
 		basicVars.push('s' + (i + 1));
 	}
 
-	//populate column header strings
+	//column header dizilerini doldur
 	columnHeaderVars = [];
 	columnHeaderVars.push('z');
 	for (var i = 1; i <= numColumns - 2 - (numRows - 1); i++) {
@@ -18,37 +18,37 @@ function solveSimplex(matrix) {
 	}
 	columnHeaderVars.push(...basicVars);
 
-	//get pivot column index
+	//pivot sutun indexi al
 	pivotColumnIndex = getPivotColumnIndex(matrix);
 
 
 	while (pivotColumnIndex != null) {
 
 
-		//populate ratios column
+		//ratios sutununu doldur
 		ratios = getRatios(matrix, numColumns, pivotColumnIndex)
 
-		//get pivot row index
+		//pivot satir indexi al
 		pivotRowIndex = getPivotRowIndex(ratios);
 		if (pivotRowIndex == null) {
 			return {
 				error: true,
-				message: "Problem is unbounded."
+				message: "Sorun sinirsiz."
 			};
 		}
 
-		//replace the 'leaving' basic variable with 'entering' variable
+		//"cikan" temel degiskeni "giren" degiskenle degistir
 		basicVars[pivotRowIndex] = columnHeaderVars[pivotColumnIndex];
 
-		//update pivot row
+		//pivot satiri guncelle
 		pivotElement = matrix[pivotRowIndex][pivotColumnIndex];
 		for (var i = 0; i < numColumns; i++) {
 			matrix[pivotRowIndex][i] /= pivotElement;
 		}
 
-		//update non-pivot rows
+		//pivot olmayan satirlari guncelle
 		for (var i = 0; i < numRows; i++) {
-			oldrow = matrix[i].slice(); //copy by value for intra-row operations in the for-loop below
+			oldrow = matrix[i].slice(); //asagidaki for dongusundeki satir ici islemler icin degere gore kopyala
 			for (var j = 0; j < numColumns; j++) {
 				if (i != pivotRowIndex) {
 					matrix[i][j] = oldrow[j] - oldrow[pivotColumnIndex] * matrix[pivotRowIndex][j];
@@ -56,7 +56,7 @@ function solveSimplex(matrix) {
 			}
 		}
 
-		//get pivot column index
+		//pivot sutun indexi al
 		pivotColumnIndex = getPivotColumnIndex(matrix);
 
 	}
@@ -70,7 +70,7 @@ function solveSimplex(matrix) {
 
 
 function getPivotColumnIndex(matrix) {
-	//check z-row for most negative element (and thus find pivot column index)
+	//z-row kontrol et (ve boylece pivot sutun indexini bul)
 	numRows = matrix.length;
 	zrow = matrix[numRows - 1];
 	mostNegativeElement = 0
@@ -85,13 +85,13 @@ function getPivotColumnIndex(matrix) {
 }
 
 function getRatios(matrix, numColumns, pivotColumnIndex) {
-	//calculate ratios
+	//ratios hesapla
 	ratios = [];
-	for (var i = 0; i < matrix.length - 1; i++) { //matrix.length-1 because we don't want ratio for z-row(last row)
+	for (var i = 0; i < matrix.length - 1; i++) { //matrix.length-1 cunku z-row(son satir) icin oran istemiyoruz
 		row = matrix[i];
 		rowSolution = row[numColumns - 1];
 		if (row[pivotColumnIndex] == 0) {
-			ratios.push(-1); //prevents division by zero and renders it ignorable
+			ratios.push(-1); //sifira bolmeyi engeller ve ihmal edilebilir hale getirir
 		} else {
 			ratios.push(rowSolution / row[pivotColumnIndex])
 		}
@@ -100,11 +100,11 @@ function getRatios(matrix, numColumns, pivotColumnIndex) {
 }
 
 function getPivotRowIndex(ratios) {
-	//check ratios column for smallest positive element (and thus find pivot row index)
+	//en kucuk pozitif eleman icin ratios sutununu kontrol et (ve böylece pivot satir indexi bulunmus olunur)
 	smallestPositiveElement = Infinity;
 	pivotRowIndex = null;
 	for (var i = 0; i < ratios.length; i++) {
-		if (ratios[i] > 0) { //check if only positive
+		if (ratios[i] > 0) { //pozitiflik durumunu kontrol et
 			if (ratios[i] < smallestPositiveElement) {
 				smallestPositiveElement = ratios[i];
 				pivotRowIndex = i;
